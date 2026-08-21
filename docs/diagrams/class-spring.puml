@@ -1,0 +1,24 @@
+@startuml class-spring
+package controller {
+  class AuthController
+  class BookingController
+  class RecommendationController
+}
+package service {
+  class AuthService
+  class BookingService
+  class RecommenderSagaService
+}
+package client {
+  class HaystackRecommenderClient
+}
+package security {
+  class JwtService
+  class TokenDenylist
+}
+AuthController --> AuthService
+AuthService --> JwtService
+BookingController --> BookingService
+RecommendationController --> RecommenderSagaService
+RecommenderSagaService --> HaystackRecommenderClient
+@enduml

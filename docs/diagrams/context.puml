@@ -1,0 +1,20 @@
+@startuml context
+!theme plain
+skinparam componentStyle rectangle
+[React Web Portal] as Portal
+[Android Mobile] as Mobile
+[Spring REST API] as Spring
+database "postgres-primary" as PG
+cloud Stripe
+[Haystack FastAPI] as HS
+database "postgres-haystack" as PGHS
+database "Neo4j" as Neo
+Portal --> Spring : HTTP JWT
+Mobile --> Spring : HTTP JWT
+Spring --> PG : JDBC R/W
+Spring --> Stripe : PaymentIntent
+Spring --> HS : Call 1 / 2 / 3
+HS --> PGHS
+HS --> Neo
+PGHS ..> PG : pull merge
+@enduml

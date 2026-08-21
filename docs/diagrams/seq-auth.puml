@@ -1,0 +1,13 @@
+@startuml seq-auth
+actor Client
+participant "Spring API" as API
+database PostgreSQL
+Client -> API: GET /api/auth/getBearerToken
+API --> Client: interim JWT
+Client -> API: POST /api/auth/login
+API -> PostgreSQL: authenticate
+API --> Client: access JWT
+note over API: denylist interim jti
+Client -> API: POST /api/auth/logout
+note over API: denylist access jti
+@enduml

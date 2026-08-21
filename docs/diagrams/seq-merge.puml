@@ -1,0 +1,19 @@
+@startuml seq-merge
+participant Spring
+database "postgres-primary" as Pri
+participant "haystack-sync" as Sync
+database "postgres-haystack" as Loc
+participant "neo4j-populate" as Pop
+database Neo4j
+Spring -> Pri: write assets / bookings
+loop every ~60s
+  Sync -> Pri: read allowlist
+  alt primary up
+    Sync -> Loc: upsert
+    Sync -> Pop: POST /v1/populate
+    Pop -> Neo4j: MERGE Asset Booking Category
+  else primary down
+    note over Sync: skip cycle; keep local
+  end
+end
+@enduml

@@ -1,0 +1,37 @@
+@startuml usecase-system
+left to right direction
+actor Customer
+actor Admin
+actor Operator
+actor Stripe
+actor Haystack
+rectangle "Heavy Rental" {
+  usecase "Browse equipment" as UC1
+  usecase "Build rental plan" as UC2
+  usecase "Book and pay deposit" as UC3
+  usecase "Submit project spec" as UC4
+  usecase "Ask knowledge question" as UC5
+  usecase "View own bookings" as UC6
+  usecase "Manage users" as UC7
+  usecase "View utilisation" as UC8
+  usecase "Manage fleet" as UC9
+  usecase "Mobilise delivery" as UC10
+  usecase "Complete return" as UC11
+  usecase "Confirm payment webhook" as UC12
+}
+Customer --> UC1
+Customer --> UC2
+Customer --> UC3
+Customer --> UC4
+Customer --> UC5
+Customer --> UC6
+Admin --> UC1
+Admin --> UC7
+Admin --> UC8
+Admin --> UC9
+Operator --> UC10
+Operator --> UC11
+Stripe --> UC12
+Haystack ..> UC4 : <<include>>
+Haystack ..> UC5 : <<include>>
+@enduml

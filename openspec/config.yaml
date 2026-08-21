@@ -1,0 +1,6 @@
+schema: spec-driven-with-adr
+# Artifact order: proposal → specs → design → adr → tasks
+context: |
+  Heavy Rental documentation pack. Specs describe as-built multi-repo behavior.
+  Portal and mobile call Spring REST only. Haystack is internal. PostgreSQL primary
+  is the OLTP source of truth. Do not invent fleet ids, rates, or budgets.

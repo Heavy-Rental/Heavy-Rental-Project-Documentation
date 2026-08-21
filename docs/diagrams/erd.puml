@@ -1,0 +1,63 @@
+@startuml erd
+hide circle
+entity "users" as U {
+  * id : long
+  --
+  * name UK
+  * email UK
+  * role : USER ADMIN DRIVER
+}
+entity "asset_categories" as C {
+  * id : long
+  --
+  name
+}
+entity "assets" as A {
+  * id : long
+  --
+  name
+  serialno
+  baseDailyRate
+  condition
+}
+entity "asset_images" as I {
+  * id : long
+  jpegBase64
+}
+entity "rental_plan" as RP {
+  * id : long
+  status : DRAFT SAVED QUOTED CONVERTED
+}
+entity "rental_plan_records" as RPR
+entity "bookings" as B {
+  * id : long
+  bookingStatus
+  depositAmount
+}
+entity "booking_items" as BI
+entity "payments" as P {
+  type : DEPOSIT BALANCE FULL
+  status : PENDING SUCCESS FAIL
+}
+entity "delivery_records" as D
+entity "return_records" as R
+entity "ai_recommendations" as AI {
+  ingest_id
+  status : GENERATED ACCEPTED REJECTED EXPIRED
+}
+entity "recommendation_items" as RI
+U ||--o{ B
+U ||--o{ RP
+U ||--o{ AI
+C ||--o{ A
+A ||--o{ I
+A ||--o{ BI
+A ||--o{ RPR
+RP ||--o{ RPR
+RP ||--o| B
+B ||--o{ BI
+B ||--o{ P
+B ||--o| D
+B ||--o| R
+AI ||--o{ RI
+@enduml

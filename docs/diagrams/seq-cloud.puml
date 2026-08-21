@@ -1,0 +1,17 @@
+@startuml seq-cloud
+actor Browser
+participant "Portal ALB" as PALB
+participant "Portal ASG" as P
+participant "REST ALB" as RALB
+participant "REST ASG" as R
+database "RDS heavy_rental" as RDS
+participant "Haystack ALB" as HALB
+participant "Haystack ASG" as H
+Browser -> PALB: HTTP :80
+PALB -> P
+P -> RALB: /api
+RALB -> R
+R -> RDS
+R -> HALB: recommend
+HALB -> H
+@enduml
