@@ -1,0 +1,12 @@
+@startuml seq-delivery
+actor Android
+participant Spring
+database PostgreSQL
+Android -> Spring: GET /api/deliveries
+Spring -> PostgreSQL: today CONFIRMED or MOBILISED
+Android -> Spring: PATCH deliveries MOBILISED
+note over Spring: CONFIRMED to MOBILISED only
+Android -> Spring: GET /api/returns
+Android -> Spring: PATCH returns COMPLETED
+note over Spring: MOBILISED to COMPLETED only
+@enduml

@@ -1,0 +1,14 @@
+@startuml seq-booking-pay
+actor Portal
+participant Spring
+participant Stripe
+database PostgreSQL
+Portal -> Spring: POST /api/bookings
+Spring -> PostgreSQL: PENDING_DEPOSIT 30%
+Portal -> Spring: POST /api/payments/deposit-intent
+Spring -> Stripe: PaymentIntent
+Stripe --> Portal: clientSecret
+Portal -> Stripe: confirm
+Stripe -> Spring: webhook
+Spring -> PostgreSQL: SUCCESS / status advance
+@enduml

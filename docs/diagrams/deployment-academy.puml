@@ -1,0 +1,29 @@
+@startuml deployment-academy
+node "Public AZ" {
+  [NAT GW] as NAT
+  [Portal ALB] as PALB
+}
+node "App AZ" {
+  [asg-portal] as P
+  [asg-rest] as R
+  [asg-haystack] as H
+  [REST ALB] as RALB
+  [Haystack ALB] as HALB
+}
+node "Data AZ" {
+  database "RDS SoR" as RDS
+  database "RDS Haystack" as RDSH
+  [asg-neo4j] as N
+  [Bolt NLB] as NLB
+}
+[Browser] --> PALB
+PALB --> P
+P --> RALB
+RALB --> R
+R --> RDS
+R --> HALB
+HALB --> H
+H --> RDSH
+H --> NLB
+NLB --> N
+@enduml

@@ -1,0 +1,8 @@
+@startuml state-booking
+[*] --> PENDING_DEPOSIT
+PENDING_DEPOSIT --> PENDING_CONFIRMED : deposit succeeded
+PENDING_CONFIRMED --> CONFIRMED
+CONFIRMED --> MOBILISED : deliver
+MOBILISED --> COMPLETED : return
+PENDING_DEPOSIT --> CANCELLED
+@enduml

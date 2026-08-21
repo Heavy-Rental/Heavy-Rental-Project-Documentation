@@ -1,0 +1,26 @@
+@startuml usecase-surfaces
+left to right direction
+actor Customer
+actor Admin
+actor Operator
+rectangle "React Web Portal" {
+  usecase "Onboard and browse" as P1
+  usecase "Cart and Stripe checkout" as P2
+  usecase "Project-spec assistant" as P3
+  usecase "Admin fleet dashboard" as P4
+}
+rectangle "Android app" {
+  usecase "Today dashboard" as M1
+  usecase "Mobilise delivery" as M2
+  usecase "Complete return" as M3
+  usecase "Customer bookings read-only" as M4
+}
+Customer --> P1
+Customer --> P2
+Customer --> P3
+Customer --> M4
+Admin --> P4
+Operator --> M1
+Operator --> M2
+Operator --> M3
+@enduml

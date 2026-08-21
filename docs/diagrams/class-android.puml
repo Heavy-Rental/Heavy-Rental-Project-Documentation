@@ -1,0 +1,13 @@
+@startuml class-android
+class HeavyRentalApp
+class AppViewModel
+class AuthRepository
+class BookingRepository
+class MockDataRepository
+class TokenSession
+HeavyRentalApp --> AppViewModel
+AppViewModel --> AuthRepository
+AppViewModel --> BookingRepository
+AppViewModel --> MockDataRepository
+AuthRepository --> TokenSession
+@enduml

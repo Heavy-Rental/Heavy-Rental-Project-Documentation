@@ -1,0 +1,17 @@
+@startuml seq-recommender
+actor Portal
+participant Spring
+participant Haystack
+database PostgreSQL
+Portal -> Spring: POST /api/recommendations/project-spec
+Spring -> Haystack: Call 1 ingest
+Haystack --> Spring: ingest_id
+Spring -> PostgreSQL: persist session
+Spring -> Haystack: Call 2 quote
+Haystack --> Spring: items[]
+Spring --> Portal: recommendationId + quote
+Portal -> Spring: knowledge-query
+Spring -> Haystack: Call 3
+Haystack --> Spring: answer
+note over Spring, Haystack: Call 2 failure: do not re-ingest
+@enduml
